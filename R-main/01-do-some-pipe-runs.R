@@ -148,4 +148,8 @@ cat("adu\nrec\nother\n", file = "slg_pipe/arena/splitnose_inputs/other_pops.txt"
 # 2017-03-22 13:07 /arena/--% (coho-working-branch) ../script/Do_standard_analyses.sh splitnose_inputs/split_and_other.txt splitnose_inputs/other_pops.txt splitnose_inputs/locs.txt SPLITNOSE_COLONY ../../inputs/splitnose_colony_runs.sh > SPLITNOSE_COLONY.log 2>&1 
 
 
+# and then:
+# 2017-03-22 13:10 /ColonyArea/--% (coho-working-branch) pwd
+# /Users/eriq/Documents/git-repos/splitnose_checkin/slg_pipe/arena/SPLITNOSE_COLONY/ColonyArea
+# 2017-03-22 13:10 /ColonyArea/--% (coho-working-branch) ./script/RunAllColony.sh Run1 0 3
 
