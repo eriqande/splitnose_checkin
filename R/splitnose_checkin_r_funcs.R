@@ -9,7 +9,7 @@
 #' @param binary_pack  Web address of the binary pack to download.
 get_slg_pipe <- function(DIR = ".", 
                          commit = "e2140a5876901db29328dab94ab9f7e0cf5cb160", 
-                         binary_pack = "https://dl.dropboxusercontent.com/u/19274778/slg_pipe_binaries-2016-04-21.tar.gz") {
+                         binary_pack = "https://www.dropbox.com/s/xf9gjqdrvosdj8k/slg_pipe_binaries-2016-04-21.tar.gz?dl=1") {
   
   if(file.exists(file.path(DIR, "slg_pipe"))) {
     message(paste("Directory slg_pipe already exists at", DIR, "   Leaving it untouched..."))
@@ -36,7 +36,8 @@ get_slg_pipe <- function(DIR = ".",
   
   # get the binary pack
   message("Downloading binaries from Dropbox and rsyncing them into place")
-  download.file(binary_pack, destfile = "slg_pipe_binaries.tar.gz")
+  downloader::download(url = binary_pack, destfile = "slg_pipe_binaries.tar.gz")
+  
   system("gunzip slg_pipe_binaries.tar.gz;
          tar -xvf slg_pipe_binaries.tar;
          rsync -avh slg_pipe_binaries/* slg_pipe")
