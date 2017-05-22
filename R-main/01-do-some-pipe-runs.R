@@ -97,6 +97,30 @@ qvals2 %>%
 # that Ottmann et al. report.
 
 
+# now, we are going to want to get a list of the individuals that
+# are splitnose and which ones are clearly not, and we want to re-associate
+# the original ID to them so that we can hand those off for mtDNA sampling.
+qv3 <- qvals2 %>%
+  mutate(miss = parse_number(miss) / 100)
+
+# and get stuff to join back with them
+orig_ids <- bind_rows(ad2, rec2) %>%
+  select(short_name, Sample_Name) %>%
+  rename(id = short_name) %>%
+  left_join(qv3, .) %>%
+  select(Sample_Name, everything())
+
+# and now we are going to take the 24 juveniles of each
+# group with the least missing data and prepare them for 
+# mtDNA sequencing
+mtDNA_splitnoses_24 <- orig_ids %>%
+  filter(splitnose_q > .9, str_detect(id, "^rec")) %>%
+  arrange(miss, desc(splitnose_q)) %>%
+  slice(1:24)
+mtDNA_other_24 <- orig_ids %>%
+  filter(splitnose_q > .9, str_detect(id, "^rec")) %>%
+  arrange(miss, desc(splitnose_q)) %>%
+  slice(1:24)
 
 # now, let's pull them out and rename them and keep track of who is who
 other <- qvals2 %>%
